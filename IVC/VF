@@ -1,44 +1,15 @@
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git checkout -b feature1
-Switched to a new branch 'feature1'
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ echo "These are feature1 notes" > notes.txt
-git add notes.txt
-git commit -m "Add notes.txt with feature1 content"
-[feature1 f7487d0] Add notes.txt with feature1 content
- 1 file changed, 1 insertion(+)
- create mode 100644 notes.txt
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git checkout main
-error: pathspec 'main' did not match any file(s) known to git
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git log feature1 --oneline
-f7487d0 (HEAD -> feature1) Add notes.txt with feature1 content
-ee99392 (feature-branch) Add feature.py
-5b272f1 (master) Initial commit: Add main.py
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git branch
-  feature-branch
-* feature1
-  master
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git checkout master
-M	main.py
-Switched to branch 'master'
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git cherry-pick feature1
-[master 7768ac8] Add notes.txt with feature1 content
- Date: Tue Apr 15 14:44:31 2025 +0530
- 1 file changed, 1 insertion(+)
- create mode 100644 notes.txt
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git push origin master
-fatal: 'origin' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git branch -m master main
 rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git branch
   feature-branch
   feature1
 * main
 rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git checkout main
-git cherry-pick feature1
 M	main.py
 Already on 'main'
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git log feature1 --oneline
+f7487d0 (feature1) Add notes.txt with feature1 content
+ee99392 (feature-branch) Add feature.py
+5b272f1 Initial commit: Add main.py
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git cherry-pick f7487d0
 On branch main
 You are currently cherry-picking commit f7487d0.
   (all conflicts fixed: run "git cherry-pick --continue")
@@ -57,11 +28,36 @@ If you wish to commit it anyway, use:
     git commit --allow-empty
 
 Otherwise, please use 'git cherry-pick --skip'
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git checkout main
-M	main.py
-Already on 'main'
-warning: cancelling a cherry picking in progress
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ abc1234 Add notes.txt with feature1 content
-abc1234: command not found
-rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git cherry-pick abc1234
-fatal: bad revision 'abc1234'
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git cherry-pick feature1
+On branch main
+You are currently cherry-picking commit f7487d0.
+  (all conflicts fixed: run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+The previous cherry-pick is now empty, possibly due to conflict resolution.
+If you wish to commit it anyway, use:
+
+    git commit --allow-empty
+
+Otherwise, please use 'git cherry-pick --skip'
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git log --oneline --graph --all
+* 7768ac8 (HEAD -> main) Add notes.txt with feature1 content
+| * f7487d0 (feature1) Add notes.txt with feature1 content
+| * ee99392 (feature-branch) Add feature.py
+|/  
+| * e0b4c3a (refs/stash) On master: Added print statement to main.py
+|/| 
+| * d7d0003 index on master: 5b272f1 Initial commit: Add main.py
+|/  
+* 5b272f1 Initial commit: Add main.py
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git remote add origin https://github.com/your-username/your-repo.git
+rvu@rvu-OptiPlex-SFF-7020:~/git-stash-task$ git remote add origin https://github.com/your-VARSHAC06/your-repo.git
+error: remote origin already exists.
+
